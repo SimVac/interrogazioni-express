@@ -13,8 +13,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.get("/", (req, res) => {
-    res.render(path.join(__dirname, './templates/index.ejs'));
+    res.render(path.join(__dirname, './templates/index.ejs'), {
+        "materie": data.materie
+    });
 });
+
+app.get("/materia/:materia", (req, res) => {
+    let materia = req.params["materia"];
+    if (materia in data.materie)
+        res.render(path.join(__dirname, './templates/materia.ejs'), {
+            "materia": data.materie[materia]
+        });
+    else
+        res.render(path.join(__dirname, './templates/404.ejs'));
+})
 
 app.get("/data", (req, res) => {
     res.send(data);

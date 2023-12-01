@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= materia.abbreviazione %></title>
+</head>
+<body>
+    <h1><%= materia.nome %></h1>
+
+    <ul>
+        <% for (studente of materia.ordine) {%>
+            <% if (!studente.interrogato) {%>
+                <li><%= studente.nome + " " + studente.cognome %></li>
+            <% } %>
+        <% } %>
+    </ul>
+
+</body>
+</html>

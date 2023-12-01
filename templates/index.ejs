@@ -6,6 +6,9 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>Home</h1>
+    <h1>Scegli la materia</h1>
+    <% for (materia in materie) { %>
+        <button onclick="location.href = '/materia/<%= materie[materia].endpoint %>'"><%= materie[materia].abbreviazione %></button>
+    <% } %>
 </body>
 </html>
