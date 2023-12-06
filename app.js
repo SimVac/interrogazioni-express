@@ -32,6 +32,10 @@ app.get("/data", (req, res) => {
     res.send(data);
 })
 
+app.get("/login", (req, res) => {
+    res.render(path.join(__dirname, './templates/login.ejs'));
+});
+
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 server.keepAliveTimeout = 120 * 1000;
