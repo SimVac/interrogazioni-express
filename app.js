@@ -28,12 +28,28 @@ app.get("/materia/:materia", (req, res) => {
         res.render(path.join(__dirname, './templates/404.ejs'));
 })
 
+app.get("/materiaadmin/:materia", (req, res) => {
+    let materia = req.params["materia"];
+    if (materia in data.materie)
+        res.render(path.join(__dirname, './templates/materiaadmin.ejs'), {
+            "materia": data.materie[materia]
+        });
+    else
+        res.render(path.join(__dirname, './templates/404.ejs'));
+})
+
 app.get("/data", (req, res) => {
     res.send(data);
 })
 
 app.get("/login", (req, res) => {
     res.render(path.join(__dirname, './templates/login.ejs'));
+});
+
+app.get("/admin", (req, res) => {
+    res.render(path.join(__dirname, './templates/admin.ejs'), {
+        "materie": data.materie
+    });
 });
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
