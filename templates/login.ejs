@@ -1,13 +1,34 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="autumn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Login</title>
 </head>
 <body>
-    <form action="/login" method="POST"><input type="password" name="password"><button type="submit">Submit</button></form>
+<div class="hero min-h-screen bg-base-200">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <form action="/login" method="POST" class="card-body">
+                <div class="form-control">
+                    <h1 class="text-xl text center font-bold">Accedi</h1>
+                </div>
+                <div class="form-control">
+                    <label class="label">
+                        <span class="label-text">Password</span>
+                    </label>
+                    <input type="password" name="password" placeholder="password" class="input input-bordered" required />
+                </div>
+                <div class="form-control mt-6">
+                    <button class="btn btn-primary btn-outline" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

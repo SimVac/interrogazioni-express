@@ -25,10 +25,6 @@ function passwordProtected(req, res, next) {
     }
 }
 
-app.get('/login', (req, res) => {
-    res.send('<form action="/login" method="POST"><input type="password" name="password"><button type="submit">Submit</button></form>');
-});
-
 app.post('/login', (req, res) => {
     if (req.body.password === 'passw0rd') {
         req.session.password = req.body.password;
@@ -40,7 +36,10 @@ app.post('/login', (req, res) => {
 
 // Route for the login page
 app.get('/login', (req, res) => {
-    res.send('<form action="/login" method="POST"><input type="password" name="password"><button type="submit">Submit</button></form>');
+    //res.send('<form action="/login" method="POST"><input type="password" name="password"><button type="submit">Submit</button></form>');
+    res.render(path.join(__dirname, './templates/login.ejs'), {
+
+    });
 });
 
 // Apply the middleware to your EJS route
@@ -66,7 +65,7 @@ app.get("/materia/:materia", (req, res) => {
         res.render(path.join(__dirname, './templates/404.ejs'));
 })
 
-app.get("/materiaadmin/:materia", (req, res) => {
+app.get("/materiaadmin/:materia",  passwordProtected,  (req, res) => {
     let materia = req.params["materia"];
     if (materia in data.materie)
         res.render(path.join(__dirname, './templates/materiaadmin.ejs'), {
