@@ -22,14 +22,20 @@ Webapp per gestre le interrogazioni in classe con interfaccia admin per gestire 
 * Body-Parser
 * Express-session
 
-## Installazione
+# Installazione
 
 Guida passo passo per installare e avviare l'applicazione sul proprio ambiente di sviluppo.
 
 bash
 
-# Installa le dipendenze
+## Installa le dipendenze
     npm install
 
-# Avvia il server
+## Avvia il server
     npm start
+
+## Autenticazione 
+
+Password admin interface 
+
+        passw0rd
