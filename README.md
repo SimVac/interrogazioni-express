@@ -29,11 +29,15 @@ Guida passo passo per installare e avviare l'applicazione sul proprio ambiente d
 bash
 
 ## Installa le dipendenze
-    npm install
+    npm install body-parser@^1.20.2
+    npm install ejs@^3.1.9
+    npm install express@^4.18.2
+    npm install express-session@^1.17.3
+    npm install path@^0.12.7
 
 ## Avvia il server
-    npm start
-
+    node app.js
+    
 ## Autenticazione 
 
 Password admin interface 
