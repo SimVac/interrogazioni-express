@@ -26,8 +26,6 @@ Webapp per gestre le interrogazioni in classe con interfaccia admin per gestire 
 
 Guida passo passo per installare e avviare l'applicazione sul proprio ambiente di sviluppo.
 
-bash
-
 ## Installa le dipendenze
     npm install body-parser@^1.20.2
     npm install ejs@^3.1.9
