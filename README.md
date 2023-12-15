@@ -38,4 +38,4 @@ bash
 
 Password admin interface 
 
-        passw0rd
+    passw0rd
