@@ -1,6 +1,8 @@
 # Interrogazioni-app
 
-## Descrizione generale dell'applicazione, specificando il suo scopo e le funzionalità principali.
+## Descrizione generale dell'applicazione
+
+Webapp per gestre le interrogazioni in classe con interfaccia admin per gestire gli interrogati e le materie
 
 ### Caratteristiche
 
@@ -12,7 +14,7 @@
 * Visualizzazione Dinamica: Uso del motore di templating EJS per generare viste dinamiche.
 * Gestione Statica dei File: Serve file statici dalla cartella "public".
 
-## Tecnologie Utilizzate
+### Tecnologie Utilizzate
 
 * Node.js
 * Express.js
@@ -31,13 +33,3 @@ bash
 
 # Avvia il server
     npm start
-
-## Uso
-
-Descrivere come utilizzare l'applicazione, inclusi esempi di richieste HTTP alle varie rotte.
-Configurazione
-
-Spiegazioni su come configurare l'applicazione, inclusi dettagli su variabili d'ambiente e impostazioni di sessione.
-Sicurezza
-
-Note sulla sicurezza, in particolare riguardanti la gestione delle sessioni e l'autenticazione.
