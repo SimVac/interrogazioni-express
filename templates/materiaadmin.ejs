@@ -53,7 +53,7 @@
                         }
                         //invio i dati cambiati
                         var xhr = new XMLHttpRequest();
-                        xhr.open('POST','http://localhost/updatedata');
+                        xhr.open('POST','https://interrogazioni.onrender.com/updatedata');
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.send(JSON.stringify(materia));
                     }
