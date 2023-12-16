@@ -3,13 +3,15 @@ const path = require("path");
 const bodyParser = require('body-parser');
 const { data } = require("./data.js");
 const session = require('express-session');
+const GitHub = require('github-api');
+
 const app = express();
 const port = process.env.PORT || 3001;
 app.use( express.static("public"))
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.use(session({
     secret: 'your-secret-key',
@@ -73,6 +75,31 @@ app.get("/materiaadmin/:materia",  passwordProtected,  (req, res) => {
         });
     else
         res.render(path.join(__dirname, './templates/404.ejs'));
+})
+
+app.post("/updatedata", (req, res) => {
+    console.log(req.body);
+    
+    let materia = req.body.endpoint;
+    data.materie[materia] = req.body;
+
+    //aggiornamento dei dati su github
+    const gh = new GitHub({
+        token: process.env.github_token
+    });
+    console.log(gh)
+    const repo = gh.getRepo("SimVac", "interrogazioni-app");
+    console.log(repo)
+    const branch = "master";
+    const path = "data.js";
+    const content = "const data = " + JSON.stringify(data) + "\n\nmodule.exports = { data };"
+    const message = "Aggiornamento Dati"
+    repo.writeFile(
+        branch,
+        path,
+        content,
+        message
+    ).then()
 })
 
 app.get("/data", (req, res) => {

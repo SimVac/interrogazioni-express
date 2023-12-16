@@ -44,13 +44,18 @@
                 <br>
                 <script>
                     function updateStudents() {
-                        <% materia.ordine.forEach((studente) => { %>
-                        var checkBox = document.getElementById('<%= studente.cognome %>');
-                        if (checkBox.checked) {
-                            // TODO:Aggiungi qui il codice per gestire lo studente selezionato e editare il JSON
-                            console.log('<%= studente.nome %> è stato interrogato.');
+                        let materia = <%-JSON.stringify(materia)%>;
+                        
+                        //prendo i nuovi valori
+                        for (let studente of materia.ordine){
+                            let checkbox = document.getElementById(studente.cognome);
+                            studente.interrogato = checkbox.checked;
                         }
-                        <% }); %>
+                        //invio i dati cambiati
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST','http://localhost:3001/updatedata');
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.send(JSON.stringify(materia));
                     }
                 </script>
                 <button class="btn primary-btn" onclick="updateStudents()">Edit</button>
