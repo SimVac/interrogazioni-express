@@ -53,7 +53,7 @@
                         }
                         //invio i dati cambiati
                         var xhr = new XMLHttpRequest();
-                        xhr.open('POST','http://localhost:3001/updatedata');
+                        xhr.open('POST','http://localhost/updatedata');
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.send(JSON.stringify(materia));
                     }
