@@ -57,8 +57,41 @@
                         xhr.setRequestHeader("Content-Type", "application/json");
                         xhr.send(JSON.stringify(materia));
                     }
+
+                    function SortStudents() {
+                        let materia = <%-JSON.stringify(materia)%>;
+
+                        shuffle(materia.ordine)
+
+                        console.log(materia);
+
+                        //invio i dati cambiati
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST','https://interrogazioni.onrender.com/updatedata');
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.send(JSON.stringify(materia));
+                    }
+
+                    function shuffle(array) {
+                        let currentIndex = array.length,  randomIndex;
+
+                        // While there remain elements to shuffle.
+                        while (currentIndex > 0) {
+
+                            // Pick a remaining element.
+                            randomIndex = Math.floor(Math.random() * currentIndex);
+                            currentIndex--;
+
+                            // And swap it with the current element.
+                            [array[currentIndex], array[randomIndex]] = [
+                                array[randomIndex], array[currentIndex]];
+                        }
+
+                        return array;
+                    }
                 </script>
                 <button class="btn primary-btn" onclick="updateStudents()">Edit</button>
+                <button class="btn primary-btn" onclick="SortStudents()">Shuffle</button>
             </div>
             <br>
             <br>
