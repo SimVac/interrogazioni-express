@@ -1,12 +1,13 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require('body-parser');
+const fs = require('fs')
 const { data } = require("./data.js");
 const session = require('express-session');
 const GitHub = require('github-api');
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 80;
 app.use( express.static("public"))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
@@ -83,23 +84,7 @@ app.post("/updatedata", (req, res) => {
     let materia = req.body.endpoint;
     data.materie[materia] = req.body;
 
-    //aggiornamento dei dati su github
-    const gh = new GitHub({
-        token: process.env.github_token
-    });
-    console.log(gh)
-    const repo = gh.getRepo("SimVac", "interrogazioni-app");
-    console.log(repo)
-    const branch = "master";
-    const path = "data.js";
-    const content = "const data = " + JSON.stringify(data) + "\n\nmodule.exports = { data };"
-    const message = "Aggiornamento Dati"
-    repo.writeFile(
-        branch,
-        path,
-        content,
-        message
-    ).then()
+    fs.writeFileSync("data.js" ,"const data = " + JSON.stringify(data) + "\n\nmodule.exports = { data };", "utf-8");
 })
 
 app.get("/data", (req, res) => {
