@@ -114,14 +114,14 @@
                 }
                 //invio i dati cambiati
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'https://interrogazioni.onrender.com/updatedata');
+                xhr.open('POST', '<%=host%>/updatedata');
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.send(JSON.stringify(dati));
 
 
                 alert("Dati inviati")
 
-                window.location.replace("https://interrogazioni.onrender.com/materiaadmin/" + materia.endpoint);
+                location.reload();
               }
 
               function SortStudents() {
@@ -137,14 +137,14 @@
 
                 //invio i dati cambiati
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'https://interrogazioni.onrender.com/updatedata');
+                xhr.open('POST', '<%=host%>/updatedata');
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.send(JSON.stringify(dati));
 
 
                 alert("Dati inviati")
 
-                window.location.replace("https://interrogazioni.onrender.com/materiaadmin/" + materia.endpoint);
+                location.reload();
               }
 
               function shuffle(array) {
@@ -188,14 +188,14 @@
 
                 //invio i dati cambiati
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'https://interrogazioni.onrender.com/updatedata');
+                xhr.open('POST', '<%=host%>/updatedata');
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.send(JSON.stringify(dati));
 
 
                 alert("Dati inviati")
 
-                window.location.replace("https://interrogazioni.onrender.com/materiaadmin/" + materia.endpoint);
+                location.reload();
               }
             </script>
           </div>

@@ -85,7 +85,8 @@ app.get("/materiaadmin/:materia", passwordProtected, (req, res) => {
       dbQueries.getElencoMateria(materia).then(ordine => {
         res.render(path.join(__dirname, "./templates/materiaadmin.ejs"), {
           ordine: ordine,
-          materia: materiaInfo[0]
+          materia: materiaInfo[0],
+          host: process.env.HOST
         });
       });
     else res.render(path.join(__dirname, "./templates/404.ejs"));
