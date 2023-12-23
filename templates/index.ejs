@@ -37,13 +37,9 @@
         <br>
         <br>
         <div class="grid grid-cols-2 gap-4 place-content-center">
-          <% for (materia in materie) { %>
-          <%if (materie[materia].attivo == true) {%>
-          <%if (materie[materia].speciale == true) {%>
-          <button class="btn btn-warning m-0.5" onclick="location.href = '/materia/<%= materie[materia].endpoint %>'"><%= materie[materia].abbreviazione %></button>
-          <% } else {%>
-          <button class="btn btn-primary m-0.5" onclick="location.href = '/materia/<%= materie[materia].endpoint %>'"><%= materie[materia].abbreviazione %></button>
-          <% } %>
+          <% for (materia of materie) { %>
+          <%if (materia.attivo) {%>
+            <button class="btn btn-primary m-0.5" onclick="location.href = '/materia/<%= materia.endpoint %>'"><%= materia.abbreviazione %></button>
           <% } %>
           <% } %>
         </div>

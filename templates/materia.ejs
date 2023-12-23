@@ -29,13 +29,13 @@
               <!-- head -->
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>Nome</th>
                   <th>Cognome</th>
                 </tr>
               </thead>
               <tbody>
-                <% for (studente of materia.ordine) {%>
-                <% if (!studente.interrogato) {%>
+                <% for (studente of ordine) {%>
+                <% if (!studente.interrogato) { %>
                 <tr>
                   <th><%=studente.nome%></th>
                   <th><%=studente.cognome%></th>

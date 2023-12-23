@@ -2,9 +2,12 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const fs = require("fs");
-const { data } = require("./data.js");
 const session = require("express-session");
-const GitHub = require("github-api");
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+const dbQueries = require('./services/dbQueries.js')
 
 const app = express();
 const port = process.env.PORT || 80;
@@ -38,58 +41,67 @@ app.post("/login", (req, res) => {
   }
 });
 
-// Route for the login page
+
 app.get("/login", (req, res) => {
-  //res.send('<form action="/login" method="POST"><input type="password" name="password"><button type="submit">Submit</button></form>');
-  res.render(path.join(__dirname, "./templates/login.ejs"), {});
+  res.render(path.join(__dirname, "./templates/login.ejs"));
 });
 
-// Apply the middleware to your EJS route
+
 app.get("/admin", passwordProtected, (req, res) => {
-  res.render(path.join(__dirname, "./templates/admin.ejs"), {
-    materie: data.materie,
+  dbQueries.getMaterie().then(result => {
+    res.render(path.join(__dirname, "./templates/admin.ejs"), {
+      materie: result
+    });
   });
 });
 
+
 app.get("/", (req, res) => {
-  res.render(path.join(__dirname, "./templates/index.ejs"), {
-    materie: data.materie,
+  dbQueries.getMaterie().then(result => {
+    res.render(path.join(__dirname, "./templates/index.ejs"), {
+      materie: result
+    });
   });
 });
 
 app.get("/materia/:materia", (req, res) => {
   let materia = req.params["materia"];
-  console.log(materia);
-  if (materia in data.materie && data.materie[materia].attivo)
-    res.render(path.join(__dirname, "./templates/materia.ejs"), {
-      materia: data.materie[materia],
-    });
-  else res.render(path.join(__dirname, "./templates/404.ejs"));
+  dbQueries.getMateria(materia).then(materiaInfo => {
+    if (materiaInfo.length)
+      dbQueries.getElencoMateria(materia).then(ordine => {
+        res.render(path.join(__dirname, "./templates/materia.ejs"), {
+          ordine: ordine,
+          materia: materiaInfo[0]
+        });
+      });
+    else res.render(path.join(__dirname, "./templates/404.ejs"));
+  })
 });
 
 app.get("/materiaadmin/:materia", passwordProtected, (req, res) => {
   let materia = req.params["materia"];
-
-  if (materia in data.materie)
-    res.render(path.join(__dirname, "./templates/materiaadmin.ejs"), {
-      materia: data.materie[materia],
-    });
-  else res.render(path.join(__dirname, "./templates/404.ejs"));
+  dbQueries.getMateria(materia).then(materiaInfo => {
+    if (materiaInfo.length)
+      dbQueries.getElencoMateria(materia).then(ordine => {
+        res.render(path.join(__dirname, "./templates/materiaadmin.ejs"), {
+          ordine: ordine,
+          materia: materiaInfo[0]
+        });
+      });
+    else res.render(path.join(__dirname, "./templates/404.ejs"));
+  })
 });
 
-app.post("/updatedata", (req, res) => {
-  let materia = req.body.endpoint;
-  data.materie[materia] = req.body;
+app.post("/updatedata", passwordProtected, (req, res) => {
+  let materia = req.body.materia;
+  let ordine = req.body.ordine;
 
-  fs.writeFileSync(
-    "data.js",
-    "const data = " + JSON.stringify(data) + "\n\nmodule.exports = { data };",
-    "utf-8"
-  );
-});
-
-app.get("/data", (req, res) => {
-  res.send(data);
+  dbQueries.updateMateria(materia).then()
+  
+  for (let i = 0; i < ordine.length; i++){
+    ordine[i].posizione = i+1;
+    dbQueries.updateOrdine(ordine[i], materia).then();
+  }
 });
 
 app.get("/login", (req, res) => {
@@ -97,7 +109,7 @@ app.get("/login", (req, res) => {
 });
 
 const server = app.listen(port, () =>
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`Server attivo sulla porta ${port}!`)
 );
 
 server.keepAliveTimeout = 120 * 1000;

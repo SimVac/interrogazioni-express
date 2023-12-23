@@ -57,12 +57,12 @@
           <br />
           <br />
           <div class="grid grid-cols-2 gap-4 place-content-center">
-            <% for (materia in materie) { %>
+            <% for (materia of materie) { %>
             <button
               class="btn btn-primary m-0.5"
-              onclick="location.href = '/materiaadmin/<%= materie[materia].endpoint %>'"
+              onclick="location.href = '/materiaadmin/<%= materia.endpoint %>'"
             >
-              <%= materie[materia].abbreviazione %>
+              <%= materia.abbreviazione %>
             </button>
             <% } %>
           </div>
