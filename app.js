@@ -95,7 +95,6 @@ app.get("/materiaadmin/:materia", passwordProtected, (req, res) => {
 app.post("/updatedata", passwordProtected, (req, res) => {
   let materia = req.body.materia;
   let ordine = req.body.ordine;
-  console.log(ordine)
 
   dbQueries.updateMateria(materia).then()
   
