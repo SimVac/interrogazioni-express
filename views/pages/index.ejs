@@ -10,9 +10,11 @@
     <div class="hero-content text-center">
       <div class="max-w-md">
         <% if (avviso) {%>
-        <%- include('../partials/avviso', {avviso: avviso}) %>
+        <a href="/avvisi">
+          <%- include('../partials/avviso', {avviso: avviso, admin: false}) %>
+        </a>
         <% } %>
-        <h1 class="text-3xl font-bold mb-16">Scegli la materia</h1>
+        <h1 class="text-3xl font-bold mb-16 mx-10">Scegli la materia</h1>
         <div class="grid grid-cols-2 gap-4 place-content-center">
           <% materie.forEach(materia => { %>
           <%if (materia.attivo) {%>

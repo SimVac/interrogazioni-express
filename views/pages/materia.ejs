@@ -10,12 +10,9 @@
     <%- include('../partials/back') %>
 
     <div class="hero min-h-screen bg-base-200">
-      <div class="hero-content text-center">
-
+      <div class="hero-content text-center mb-16">
         <div class="max-w-md">
-          <h1 class="text-3xl font-bold"><%= materia.nome %></h1>
-
-          <br>
+          <h1 class="text-3xl font-bold mb-10"><%= materia.nome %></h1>
 
           <div class="overflow-x-auto">
             <table class="table">
@@ -38,12 +35,9 @@
               </tbody>
             </table>
           </div>
-          <br>
-          <br>
-          <br>
-          <%- include('../partials/navbar') %>
         </div>
       </div>
+      <%- include('../partials/navbar') %>
     </div>
   </div>
 

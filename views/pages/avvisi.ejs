@@ -9,7 +9,7 @@
             <div class="max-w-md pb-10">
             <h1 class="text-3xl font-bold mb-5 mt-10">Avvisi</h1>
             <% avvisi.forEach(avviso => { %>
-                <%- include('../partials/avviso', {avviso: avviso}) %>
+                <%- include('../partials/avviso', {avviso: avviso, admin: false}) %>
             <% })%>
             </div>
         </div>

@@ -80,12 +80,12 @@ app.get("/materia/:materia", (req, res) => {
   })
 });
 
-app.get("/materiaadmin/:materia", passwordProtected, (req, res) => {
+app.get("/materia-admin/:materia", passwordProtected, (req, res) => {
   let materia = req.params["materia"];
   dbQueries.getMateria(materia).then(materiaInfo => {
     if (materiaInfo)
       dbQueries.getElencoMateria(materia).then(ordine => {
-        res.render("pages/materiaadmin.ejs", {
+        res.render("pages/materia_admin.ejs", {
           ordine: ordine,
           materia: materiaInfo,
           host: process.env.HOST
@@ -95,9 +95,8 @@ app.get("/materiaadmin/:materia", passwordProtected, (req, res) => {
   })
 });
 
-app.post("/updatedata", passwordProtected, (req, res) => {
-  let materia = req.body.materia;
-  let ordine = req.body.ordine;
+app.post("/update-materia", passwordProtected, (req, res) => {
+  let { materia, ordine } = req.body;
 
   dbQueries.updateMateria(materia).then()
   
@@ -105,6 +104,11 @@ app.post("/updatedata", passwordProtected, (req, res) => {
     ordine[i].posizione = i+1;
     dbQueries.updateOrdine(ordine[i], materia).then();
   }
+});
+
+app.post("/add-avviso", passwordProtected, (req, res) => {
+  let { titolo, descrizione } = req.body;
+  dbQueries.addAvviso({titolo, descrizione}).then();
 });
 
 app.get("/login", (req, res) => {
@@ -117,6 +121,21 @@ app.get("/avvisi", (req, res) => {
       avvisi: avvisi
     });
   })
+})
+
+app.get("/avvisi-admin", passwordProtected, (req, res) => {
+  dbQueries.getAvvisi().then(avvisi => {
+    res.render('pages/avvisi_admin.ejs', {
+      avvisi: avvisi,
+      host: process.env.HOST
+    });
+  })
+})
+
+app.post("/delete-avviso", passwordProtected, (req, res) => {
+  let { id } = req.body;
+
+  dbQueries.deleteAvviso(id);
 })
 
 const server = app.listen(port, () =>

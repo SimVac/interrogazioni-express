@@ -6,26 +6,22 @@
   <body>
     <div class="hero min-h-screen bg-base-200">
       <div class="hero-content text-center">
-        <div class="max-w-md">
+        <div class="max-w-md pb-10">
           <div class="flex justify-center items-center">
             <img src="wip.png" alt="wip" height="100" width="100" />
           </div>
-          <br />
-          <h1 class="text-3xl font-bold">Modifica la materia</h1>
-          <br />
-          <br />
+          <h1 class="text-3xl font-bold mb-16 mt-10">Modifica la materia</h1>
           <div class="grid grid-cols-2 gap-4 place-content-center">
             <% for (materia of materie) { %>
             <button
               class="btn btn-primary m-0.5"
-              onclick="location.href = '/materiaadmin/<%= materia.endpoint %>'"
+              onclick="location.href = '/materia-admin/<%= materia.endpoint %>'"
             >
               <%= materia.abbreviazione %>
             </button>
             <% } %>
           </div>
-          <br />
-          <br />
+          <button class="btn btn-warning mt-5 w-full" onclick="location.href = '/avvisi-admin'">Avvisi</button>
         </div>
       </div>
     </div>

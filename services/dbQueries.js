@@ -76,6 +76,21 @@ async function getAvvisi(){
   return data;
 }
 
+async function addAvviso(avviso){
+  if (!avviso) return;
+  await db.query(
+    "INSERT INTO avviso (titolo, descrizione, data) VALUES (?, ?, NOW())",
+    [avviso.titolo, avviso.descrizione]
+  )
+}
+
+async function deleteAvviso(id){
+  await db.query(
+    "DELETE FROM avviso WHERE id=?",
+    [id]
+  )
+}
+
 module.exports = {
   getMaterie,
   getElencoMateria,
@@ -83,5 +98,7 @@ module.exports = {
   updateOrdine,
   updateMateria,
   getUltimoAvviso,
-  getAvvisi
+  getAvvisi,
+  addAvviso,
+  deleteAvviso
 }
