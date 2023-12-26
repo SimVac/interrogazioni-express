@@ -36,7 +36,7 @@ app.post("/login", (req, res) => {
     req.session.password = req.body.password;
     res.redirect("/admin");
   } else {
-    res.send('Incorrect Password! <a href="/login">Try again</a>');
+    res.render('pages/login.ejs', {password: true});
   }
 });
 
