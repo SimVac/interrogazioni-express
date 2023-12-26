@@ -47,30 +47,33 @@ app.get("/login", (req, res) => {
 
 
 app.get("/admin", passwordProtected, (req, res) => {
-  dbQueries.getMaterie().then(result => {
+  dbQueries.getMaterie().then(materie => {
     res.render("pages/admin.ejs", {
-      materie: result
+      materie: materie
     });
   });
 });
 
 
 app.get("/", (req, res) => {
-  dbQueries.getMaterie().then(result => {
-    res.render("pages/index.ejs", {
-      materie: result
-    });
+  dbQueries.getMaterie().then(materie => {
+    dbQueries.getUltimoAvviso().then(avviso => {
+      res.render("pages/index.ejs", {
+        materie: materie,
+        avviso: avviso
+      });
+    })
   });
 });
 
 app.get("/materia/:materia", (req, res) => {
   let materia = req.params["materia"];
   dbQueries.getMateria(materia).then(materiaInfo => {
-    if (materiaInfo.length)
+    if (materiaInfo)
       dbQueries.getElencoMateria(materia).then(ordine => {
         res.render("pages/materia.ejs", {
           ordine: ordine,
-          materia: materiaInfo[0]
+          materia: materiaInfo
         });
       });
     else res.render("pages/404.ejs");
@@ -80,11 +83,11 @@ app.get("/materia/:materia", (req, res) => {
 app.get("/materiaadmin/:materia", passwordProtected, (req, res) => {
   let materia = req.params["materia"];
   dbQueries.getMateria(materia).then(materiaInfo => {
-    if (materiaInfo.length)
+    if (materiaInfo)
       dbQueries.getElencoMateria(materia).then(ordine => {
         res.render("pages/materiaadmin.ejs", {
           ordine: ordine,
-          materia: materiaInfo[0],
+          materia: materiaInfo,
           host: process.env.HOST
         });
       });
@@ -107,6 +110,14 @@ app.post("/updatedata", passwordProtected, (req, res) => {
 app.get("/login", (req, res) => {
   res.render("pages/login.ejs");
 });
+
+app.get("/avvisi", (req, res) => {
+  dbQueries.getAvvisi().then(avvisi => {
+    res.render("pages/avvisi.ejs", {
+      avvisi: avvisi
+    });
+  })
+})
 
 const server = app.listen(port, () =>
   console.log(`Server attivo sulla porta ${port}!`)

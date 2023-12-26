@@ -17,7 +17,7 @@ async function getMateria(endpoint){
   );
   const data = helper.emptyOrRows(rows);
 
-  return data
+  return data.length > 0 ? data[0] : null;
 }
 
 async function getElencoMateria(endpoint){
@@ -53,10 +53,35 @@ async function updateMateria(materia){
   )
 }
 
+async function getUltimoAvviso(){
+  const rows = await db.query(
+    "SELECT * FROM avviso " +
+    "INNER JOIN " +
+    "(SELECT MAX(data) as latestDate FROM avviso) latestDateAvviso " +
+    "ON avviso.data = latestDateAvviso.latestDate"
+  );
+
+  const data = helper.emptyOrRows(rows);
+
+  return data.length > 0 ? data[0] : null;
+}
+
+async function getAvvisi(){
+  const rows = await db.query(
+    "SELECT * FROM avviso ORDER BY avviso.data DESC"
+  )
+
+  const data = helper.emptyOrRows(rows);
+
+  return data;
+}
+
 module.exports = {
   getMaterie,
   getElencoMateria,
   getMateria,
   updateOrdine,
-  updateMateria
+  updateMateria,
+  getUltimoAvviso,
+  getAvvisi
 }
