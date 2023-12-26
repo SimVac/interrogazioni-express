@@ -2,7 +2,7 @@
     <div>
       <h3 class="font-bold"><%= avviso.titolo %></h3>
       <p class="text-s py-1"><%= avviso.descrizione %></p>
-      <p class="text-xs"><%= avviso.data.toLocaleDateString() %></p>
+      <p class="text-xs"><%= avviso.data.toLocaleDateString("it-IT") %></p>
     </div>
     <% if (locals.admin) { %>
       <button onclick="deleteAvviso(<%= avviso.id %>)">
