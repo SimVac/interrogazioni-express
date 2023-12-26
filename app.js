@@ -42,13 +42,13 @@ app.post("/login", (req, res) => {
 
 
 app.get("/login", (req, res) => {
-  res.render(path.join(__dirname, "./templates/login.ejs"));
+  res.render("pages/login.ejs");
 });
 
 
 app.get("/admin", passwordProtected, (req, res) => {
   dbQueries.getMaterie().then(result => {
-    res.render(path.join(__dirname, "./templates/admin.ejs"), {
+    res.render("pages/admin.ejs", {
       materie: result
     });
   });
@@ -57,7 +57,7 @@ app.get("/admin", passwordProtected, (req, res) => {
 
 app.get("/", (req, res) => {
   dbQueries.getMaterie().then(result => {
-    res.render(path.join(__dirname, "./templates/index.ejs"), {
+    res.render("pages/index.ejs", {
       materie: result
     });
   });
@@ -68,12 +68,12 @@ app.get("/materia/:materia", (req, res) => {
   dbQueries.getMateria(materia).then(materiaInfo => {
     if (materiaInfo.length)
       dbQueries.getElencoMateria(materia).then(ordine => {
-        res.render(path.join(__dirname, "./templates/materia.ejs"), {
+        res.render("pages/materia.ejs", {
           ordine: ordine,
           materia: materiaInfo[0]
         });
       });
-    else res.render(path.join(__dirname, "./templates/404.ejs"));
+    else res.render("pages/404.ejs");
   })
 });
 
@@ -82,13 +82,13 @@ app.get("/materiaadmin/:materia", passwordProtected, (req, res) => {
   dbQueries.getMateria(materia).then(materiaInfo => {
     if (materiaInfo.length)
       dbQueries.getElencoMateria(materia).then(ordine => {
-        res.render(path.join(__dirname, "./templates/materiaadmin.ejs"), {
+        res.render("pages/materiaadmin.ejs", {
           ordine: ordine,
           materia: materiaInfo[0],
           host: process.env.HOST
         });
       });
-    else res.render(path.join(__dirname, "./templates/404.ejs"));
+    else res.render("pages/404.ejs");
   })
 });
 
@@ -105,7 +105,7 @@ app.post("/updatedata", passwordProtected, (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.render(path.join(__dirname, "./templates/login.ejs"));
+  res.render("pages/login.ejs");
 });
 
 const server = app.listen(port, () =>
