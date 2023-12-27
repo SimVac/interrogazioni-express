@@ -55,11 +55,8 @@ async function updateMateria(materia){
 
 async function getUltimoAvviso(){
   const rows = await db.query(
-    "SELECT * FROM avviso " +
-    "INNER JOIN " +
-    "(SELECT MAX(data) as latestDate FROM avviso) latestDateAvviso " +
-    "ON avviso.data = latestDateAvviso.latestDate"
-  );
+    "SELECT * FROM avviso ORDER BY preferito DESC, avviso.data DESC LIMIT 1"
+  )
 
   const data = helper.emptyOrRows(rows);
 
@@ -68,7 +65,7 @@ async function getUltimoAvviso(){
 
 async function getAvvisi(){
   const rows = await db.query(
-    "SELECT * FROM avviso ORDER BY avviso.data DESC"
+    "SELECT * FROM avviso ORDER BY preferito DESC, avviso.data DESC"
   )
 
   const data = helper.emptyOrRows(rows);
@@ -79,7 +76,7 @@ async function getAvvisi(){
 async function addAvviso(avviso){
   if (!avviso) return;
   await db.query(
-    "INSERT INTO avviso (titolo, descrizione, data) VALUES (?, ?, NOW())",
+    "INSERT INTO avviso (titolo, descrizione, data, preferito) VALUES (?, ?, NOW(), 0)",
     [avviso.titolo, avviso.descrizione]
   )
 }
@@ -91,6 +88,13 @@ async function deleteAvviso(id){
   )
 }
 
+async function updateAvvisoPreferito(id, preferito){
+  await db.query(
+    "UPDATE avviso SET preferito=? WHERE id=?",
+    [preferito, id]
+  );
+}
+
 module.exports = {
   getMaterie,
   getElencoMateria,
@@ -100,5 +104,6 @@ module.exports = {
   getUltimoAvviso,
   getAvvisi,
   addAvviso,
-  deleteAvviso
+  deleteAvviso,
+  updateAvvisoPreferito
 }

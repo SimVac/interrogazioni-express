@@ -108,7 +108,11 @@ app.post("/update-materia", passwordProtected, (req, res) => {
 
 app.post("/add-avviso", passwordProtected, (req, res) => {
   let { titolo, descrizione } = req.body;
-  dbQueries.addAvviso({titolo, descrizione}).then();
+  dbQueries.addAvviso({titolo, descrizione}).then(() => {
+    dbQueries.getAvvisi().then(avvisi => {
+      res.render("pages/avvisi_admin", {avvisi: avvisi, host: process.env.HOST});
+    })
+  });
 });
 
 app.get("/login", (req, res) => {
@@ -136,6 +140,12 @@ app.post("/delete-avviso", passwordProtected, (req, res) => {
   let { id } = req.body;
 
   dbQueries.deleteAvviso(id);
+})
+
+app.post("/update-avviso-preferito", passwordProtected, (req, res) => {
+  let { id, preferito } = req.body;
+  
+  dbQueries.updateAvvisoPreferito(id, preferito).then();
 })
 
 const server = app.listen(port, () =>
