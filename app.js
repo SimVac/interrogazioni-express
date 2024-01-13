@@ -109,9 +109,7 @@ app.post("/update-materia", passwordProtected, (req, res) => {
 app.post("/add-avviso", passwordProtected, (req, res) => {
   let { titolo, descrizione } = req.body;
   dbQueries.addAvviso({titolo, descrizione}).then(() => {
-    dbQueries.getAvvisi().then(avvisi => {
-      res.render("pages/avvisi_admin", {avvisi: avvisi, host: process.env.HOST});
-    })
+    res.redirect('/avvisi-admin')
   });
 });
 

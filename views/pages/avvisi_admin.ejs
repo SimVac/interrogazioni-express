@@ -36,6 +36,30 @@
     </div>
   </div>
   <%- include('../partials/navbar') %>
+  <script>
+    let deleteAvviso = function(id) {
+      const dati = {
+        id: id
+      }
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '<%=host%>/delete-avviso');
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(JSON.stringify(dati));
+
+      const avviso = document.getElementById("avviso-" + id);
+      avviso.parentNode.removeChild(avviso);
+    }
+    let updatePreferito = function(id) {
+      const dati = {
+        id: id,
+        preferito: document.getElementById(`preferito-${id}`).checked
+      }
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '<%=host%>/update-avviso-preferito');
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(JSON.stringify(dati));
+    }
+  </script>
 </body>
 
 </html>
