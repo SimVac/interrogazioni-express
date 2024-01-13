@@ -10,7 +10,7 @@ const dbQueries = require('./services/dbQueries.js')
 
 const app = express();
 const port = process.env.PORT || 80;
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");

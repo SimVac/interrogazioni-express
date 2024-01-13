@@ -21,6 +21,8 @@ lib-cov
 
 .idea
 
+public/stylesheets/style.css
+
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov
