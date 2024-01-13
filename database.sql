@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: sql.freedb.tech
--- Creato il: Gen 12, 2024 alle 21:22
--- Versione del server: 8.0.35-0ubuntu0.22.04.1
--- Versione PHP: 8.2.7
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
