@@ -1,8 +1,8 @@
 <div role="alert" id="avviso-<%= avviso.id %>" class="alert flex justify-between alert-info bg-blue-200 my-10">
     <div>
-      <h3 class="font-bold"><%= avviso.titolo %></h3>
-      <p class="text-s py-1"><%= avviso.descrizione %></p>
-      <p class="text-xs"><%= avviso.data.toLocaleDateString("it-IT") %></p>
+      <h3 class="font-bold text-left"><%= avviso.titolo %></h3>
+      <p class="text-s py-1 text-left"><%= avviso.descrizione %></p>
+      <p class="text-xs text-left"><%= avviso.data.toLocaleDateString("it-IT") %></p>
     </div>
     <div>
     <% if (locals.admin) { %>
