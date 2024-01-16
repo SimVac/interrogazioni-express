@@ -45,6 +45,10 @@ app.get("/login", (req, res) => {
   res.render("pages/login.ejs");
 });
 
+app.get("/test", (req, res) => {
+  res.send("HEllo");
+})
+
 
 app.get("/admin", passwordProtected, (req, res) => {
   dbQueries.getMaterie().then(materie => {
