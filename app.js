@@ -46,7 +46,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/api", (req, res) => {
-  res.send("HEllo");
+  res.render('pages/index.ejs');
 })
 
 
