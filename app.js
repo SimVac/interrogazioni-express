@@ -152,3 +152,5 @@ const server = app.listen(port, () =>
 
 server.keepAliveTimeout = 120 * 1000;
 server.headersTimeout = 120 * 1000;
+
+module.exports = app;
